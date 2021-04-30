@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './Login';
 import ConfirmPassword from './ConfirmPassword';
 import ForgotPassword from './ForgotPassword';
-
+import SecurityCode from './SecurityCode';
+import '../../styles/auth/auth.scss';
 
 
 export default function Auth() {
@@ -11,7 +12,7 @@ export default function Auth() {
         <Router>
             <Route path="/Auth/login" component={Login} />
             <Route path="/Auth/forgot-password" component={ForgotPassword} />
-            <Route path="/Auth/code" component={ConfirmPassword} />
+            <Route path="/Auth/security-code" component={SecurityCode} />
             <Route path="/Auth/confirm-password" component={ConfirmPassword} />
         </Router>
     )

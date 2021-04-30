@@ -1,16 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
-// import Link from '@material-ui/core/Link';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles({
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        minWidth: 275,
+        maxWidth: 350,
+        marginTop: theme.spacing(15),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+        '& .MuiSvgIcon-root':{
+            fontSize: 28,
+        },
+        '& .MuiFormLabel-root': {
+            '&.Mui-focused': {
+                color: '#0d6efd',
+            }
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'rgb(206, 212, 218)',
+                borderWidth: 1.5,
+            },
+            '&:hover fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+        },
+    },
+    cardContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: '#0d6efd',
+        width: theme.spacing(5.5),
+        height: theme.spacing(5.5),
+    },
     checkBox: {
         marginLeft: 4,
         '&:hover': {
@@ -92,8 +138,9 @@ const useStyles = makeStyles({
         fontSize: 12,
         margin: '-2px 2px 8px 2px',
     }
-});
-function StyledCheckbox(props) {
+}));
+
+export function StyledCheckbox(props) {
     const styles = useStyles();
     return (
         <FormControlLabel
@@ -112,7 +159,7 @@ function StyledCheckbox(props) {
     )
 }
 
-function SubmitBtn(props) {
+export function SubmitBtn(props) {
     SubmitBtn.propTypes = {
         text: PropTypes.string,
     }
@@ -128,10 +175,10 @@ function SubmitBtn(props) {
         </Button>
     )
 }
-function HelpingText(props) {
+export function HelpingText(props) {
     HelpingText.propTypes = {
         text: PropTypes.string,
-        component: PropTypes.component,
+        component: PropTypes.object,
     }
     const styles = useStyles();
     return (
@@ -140,7 +187,7 @@ function HelpingText(props) {
         </Typography>
     )
 }
-function ResetLink(props) {
+export function ResetLink(props) {
     ResetLink.propTypes = {
         text: PropTypes.string,
         to: PropTypes.string,
@@ -156,11 +203,13 @@ function ResetLink(props) {
 }
 
 
-function FormInput(props) {
+export function FormInput(props) {
     FormInput.propTypes = {
+        value: PropTypes.string,
         type: PropTypes.string,
         label: PropTypes.string,
-        autoComplete: PropTypes.string
+        autoComplete: PropTypes.string,
+        onChange: PropTypes.func,
     }
     const styles = useStyles();
     return (
@@ -170,79 +219,34 @@ function FormInput(props) {
             margin="normal"
             fullWidth
             size="small"
-            name={props.type}
+            onChange = {props.onChange}
+            value={props.value}
             label={props.label}
             type={props.type}
-            id={props.type}
-            autoComplete={props.autoComplete}
+            id={props.label}
         />
     )
 }
-
-export class LoginForm extends Component {
-    constructor(props) {
-        super(props)
+export function FormCard(props){
+    FormCard.propTypes = {
+        components: PropTypes.object,
+        title: PropTypes.string,
+        icon: PropTypes.object,
     }
-    render() {
-        return (
-            <form>
-                <FormInput type="email" label="Email Address" autoComplete='email' />
-                <FormInput type="password" label="Password" autoComplete='password' />
-                <StyledCheckbox />
-                <SubmitBtn text='Login' />
-                <ResetLink text='Forgot Password?' to='/forgot-password' />
-            </form>
-        )
-    }
+    const styles = useStyles();
+    return (
+        <Container component='main' maxWidth='xs'>
+            <Card className={styles.root}>
+                <CardContent className={styles.cardContent}>
+                    <Avatar className={styles.avatar}>
+                       {props.icon}
+                    </Avatar>
+                    <Typography component="h2" variant="h6">
+                        {props.title}
+                </Typography>
+                    {props.components}
+                </CardContent>
+            </Card>
+        </Container>
+    )
 }
-export class ForgotPassword extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <form>
-                <FormInput type="email" label="Email" autoComplete='email' />
-                <HelpingText text='By clicking "Reset Password", we will send a link to reset the password' />
-                <SubmitBtn text='Reset Password'/>
-                <ResetLink text='Back to Login' to='/login' />
-            </form>
-        )
-    }
-}
-
-export class ConfirmPassword extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <form>
-                <FormInput type="password" label="Password" autoComplete='password' />
-                <FormInput type="password" label="Confirm Password" autoComplete='password' />
-                <HelpingText text='Create a new password that is at least 6 characters long.' />
-                <SubmitBtn text='Confirm'/>
-                <ResetLink text='Cancel' to='/login' />
-            </form>
-        )
-    }
-}
-
-export class Security extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <form>
-                <FormInput type="code" label="Code" autoComplete='code' />
-                <HelpingText 
-                    text='If the code is not received within two minutes, press:' 
-                    component={<a href="#">Send again</a>} />
-                <SubmitBtn text='Continue'/>
-                <ResetLink text='Cancel' to='/login' />
-            </form>
-        )
-    }
-}
-

@@ -1,74 +1,21 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-import Container from '@material-ui/core/Container';
-import {LoginForm} from '../../components/auth/Form'
-import '../../styles/auth/auth.scss';
+import { FormInput, StyledCheckbox, SubmitBtn, ResetLink, FormCard } from '../../components/auth/FormElements'
 
-const useStyle = makeStyles((theme) => ({
-    root: {
-        minWidth: 275,
-        maxWidth: 350,
-        marginTop: theme.spacing(15),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
-        '& .MuiFormLabel-root': {
-            '&.Mui-focused': {
-                color: '#0d6efd',
-            }
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'rgb(206, 212, 218)',
-                borderWidth: 1.5,
-            },
-            '&:hover fieldset': {
-                borderColor: 'rgb(134, 183, 254)',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: 'rgb(134, 183, 254)',
-            },
-        },
-    },
-    cardContent: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: '#0d6efd',
-        width: theme.spacing(5.5),
-        height: theme.spacing(5.5),
-    },
-    icons: {
-        fontSize: 28,
-    },
-}));
-
-export default function Auth() {
-    const styles = useStyle();
+export default function auth() {
     return (
-        <Container component='main' maxWidth='xs'>
-            <Card className={styles.root}>
-                <CardContent className={styles.cardContent}>
-                    <Avatar className={styles.avatar}>
-                        <LockOpenOutlinedIcon className={styles.icons} />
-                    </Avatar>
-                    <Typography component="h2" variant="h6">
-                        Login in Admin panel
-                </Typography>
-                    <LoginForm />
-                </CardContent>
-            </Card>
-        </Container>
-
+        <FormCard
+            icon={<LockOpenOutlinedIcon/>}
+            title='Login in Admin panel'
+            components={
+                <form>
+                    <FormInput type="email" label="Email Address" autoComplete='email' />
+                    <FormInput type="password" label="Password" autoComplete='password' />
+                    <StyledCheckbox />
+                    <SubmitBtn text='Login' />
+                    <ResetLink text='Forgot Password?' to='/forgot-password' />
+                </form>
+            }
+        />
     )
 }
