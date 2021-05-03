@@ -208,12 +208,16 @@ export function FormInput(props) {
         value: PropTypes.string,
         type: PropTypes.string,
         label: PropTypes.string,
+        maxLength: PropTypes.number,
         autoComplete: PropTypes.string,
         onChange: PropTypes.func,
     }
     const styles = useStyles();
     return (
         <TextField
+            inputProps={{
+                maxLength: props.maxLength,
+            }}
             className={styles.formInput}
             variant="outlined"
             margin="normal"

@@ -1,15 +1,17 @@
 import React from 'react';
 import './styles/app/App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/home/home';
-import Auth from './pages/auth/Auth';
+import WorkflowRouter from './pages/workflow/WorkflowRouter';
+import AuthRouter from './pages/auth/AuthRouter';
+import Error404 from './pages/Error/404page';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/home' component={Home}/>
-        <Route path="/auth" component={Auth}/>
+        <Route path='/workflow' component={WorkflowRouter} />
+        <Route path="/auth" component={AuthRouter}/>
+        <Route path="*" component={Error404}/>
       </Switch>
     </Router>
   );
