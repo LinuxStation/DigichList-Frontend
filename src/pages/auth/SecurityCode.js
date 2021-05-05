@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { FormInput, HelpingText, SubmitBtn, ResetLink, FormCard } from '../../components/auth/FormElements'
+import { FormInput, HelpingText, SubmitBtn, ResetLink, FormCard } from '../../components/auth/FormElements';
+
 
 export default class SecurityForm extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class SecurityForm extends Component {
                 title={"Security Code"}
                 components={
                     <form onSubmit={this.handleSubmit}>
-                        <FormInput type="text" maxLength="6" label="Code (6 characters)"  value={this.state.value} onChange={this.handleChange} />
+                        <FormInput type="text" maxLength="6" label="Code (6 characters)" value={this.state.value} onChange={this.handleChange} />
                         <HelpingText
                             text='If the code is not received within two minutes, press:'
                             component={<a href="#">Send again</a>} />
