@@ -11,6 +11,8 @@ import FormStyle from './FormStyle';
 
 import PropTypes from 'prop-types';
 
+
+
 export function SubmitBtn(props) {
     SubmitBtn.propTypes = {
         text: PropTypes.string,
@@ -35,7 +37,7 @@ export function HelpingText(props) {
     const styles = FormStyle();
     return (
         <Typography variant="body2" className={styles.helpText}>
-           {props.text}  {props.component}
+            {props.text}  {props.component}
         </Typography>
     )
 }
@@ -73,8 +75,8 @@ export function FormInput(props) {
             margin="normal"
             fullWidth
             size="small"
-            onBlur = {props.onBlur}
-            onChange = {props.onChange}
+            onBlur={props.onBlur}
+            onChange={props.onChange}
             value={props.value}
             label={props.label}
             type={props.type}
@@ -82,7 +84,8 @@ export function FormInput(props) {
         />
     )
 }
-export function FormCard(props){
+
+export function FormCard(props) {
     FormCard.propTypes = {
         components: PropTypes.object,
         title: PropTypes.string,
@@ -94,11 +97,11 @@ export function FormCard(props){
             <Card className={styles.root}>
                 <CardContent className={styles.cardContent}>
                     <Avatar className={styles.avatar}>
-                       {props.icon}
+                        {props.icon}
                     </Avatar>
                     <Typography component="h2" variant="h6">
                         {props.title}
-                </Typography>
+                    </Typography>
                     {props.components}
                 </CardContent>
             </Card>
