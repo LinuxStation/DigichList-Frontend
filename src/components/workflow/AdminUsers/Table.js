@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { tableHand, tableBody } from './TableStyle';
 
@@ -26,6 +26,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+
+import CustomModal from './Modal';
 
 const rows = [
     {
@@ -137,6 +139,12 @@ const EnhancedTableToolbar = (props) => {
     const classes = tableHand();
     const { numSelected } = props;
 
+    const [open, setOpenState] = useState(false)
+
+    const handleClickOpen = () => {
+        setOpenState(true);
+    };
+
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -169,7 +177,7 @@ const EnhancedTableToolbar = (props) => {
                 ) : (
                     <div>
                         <Tooltip title="Add new admin">
-                            <IconButton aria-label="add">
+                            <IconButton aria-label="add" onClick={handleClickOpen}>
                                 <PersonAddIcon />
                             </IconButton>
                         </Tooltip>
@@ -181,6 +189,7 @@ const EnhancedTableToolbar = (props) => {
                     </div>
                 )}
             </Grid>
+            <CustomModal title='name' open={open} setOpenState={setOpenState} />
         </Toolbar>
     );
 };
@@ -193,11 +202,11 @@ EnhancedTableToolbar.propTypes = {
 function EnhancedTable() {
     const classes = tableBody();
 
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('id');
-    const [selected, setSelected] = React.useState([]);
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(30);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('id');
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(30);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -315,7 +324,7 @@ function EnhancedTable() {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[ 20, 30, 50]}
+                    rowsPerPageOptions={[20, 30, 50]}
                     component="div"
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
