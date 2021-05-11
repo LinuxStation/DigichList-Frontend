@@ -120,7 +120,8 @@ export const tableHand = makeStyles((theme) => ({
         color: '#fff',
     },
     tableHeadGrid: {
-        marginRight: 2,
+        marginRight: 1,
+        display: 'flex',
         justifyContent: 'flex-end',
     }
 }));

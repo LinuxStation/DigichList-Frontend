@@ -31,6 +31,34 @@ export default makeStyles((theme) => ({
             },
         },
     },
+    form: {
+        maxWidth: 450,
+        minWidth: 280,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+        '& .MuiSvgIcon-root':{
+            fontSize: 28,
+        },
+        '& .MuiFormLabel-root': {
+            '&.Mui-focused': {
+                color: '#0d6efd',
+            }
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'rgb(206, 212, 218)',
+                borderWidth: 1.5,
+            },
+            '&:hover fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+        },
+    },
     cardContent: {
         display: 'flex',
         flexDirection: 'column',
