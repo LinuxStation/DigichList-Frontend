@@ -6,8 +6,6 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import FormStyle from '../../../components/auth/FormStyle';
 
 
@@ -18,19 +16,19 @@ const DeleteForm = (props) => {
     }
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <div>
+            <div className={styles.fullWidth}>
                 <MuiDialogContent dividers>
-                    <Typography variant="body2" className={styles.title}>
-                        You really want delete this data?
+                    <Typography variant="body1" className={styles.title}>
+                        You really want delete this data (<strong className={styles.primary}>{props.data.length}</strong> items)?
                     </Typography>
                     <div className={styles.demo}>
                         <List>
                             {props.data.map((item) => {
                                 const { name, id } = item
                                 return (
-                                    <ListItem key={id}>
-                                        <ListItemText variant="body2" primary={`${id}: ${name}`}/>
-                                    </ListItem>
+                                    <Typography key={id} variant="body2" className={styles.title}>
+                                        {`{ Id = ${id}; name = ${name} }`}
+                                    </Typography>
                                 )
                             })}
                         </List>

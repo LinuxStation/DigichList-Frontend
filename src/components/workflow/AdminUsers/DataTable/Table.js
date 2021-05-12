@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { tableBody } from '../TableStyle';
+import { tableBody } from './TableStyle';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -113,7 +113,7 @@ function DataTable() {
     }
     const selectedVal = (allRows) => {
         let tempObj = []
-        for (let i = 0; i < selected.length; i++) {
+        for (let i = 0; i < allRows.length; i++) {
             for (let j = 0; j < selected.length; j++) {
                 if (allRows[i].id == selected[j]) {
                     tempObj.push(allRows[i])
@@ -124,6 +124,7 @@ function DataTable() {
     }
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    
     return (
         <div className={classes.root} >
             <Paper className={classes.paper}>

@@ -59,6 +59,12 @@ export default makeStyles((theme) => ({
             },
         },
     },
+    fullWidth: {
+        width: '100%',
+    },
+    primary: {
+        color: '#2A8BF2',
+    },
     cardContent: {
         display: 'flex',
         flexDirection: 'column',

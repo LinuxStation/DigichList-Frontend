@@ -84,7 +84,8 @@ export default makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 240,
+    minHeight: '50%',
+    maxHeight: '100%',
   },
   menuIcon: {
     color: "#707C97",

@@ -12,7 +12,7 @@ import * as Yup from "yup";
 const EditAdmin = (props) => {
     const styles = FormStyle()
     return (<div>
-        { props.data.length < 2 ? (
+        { props.data.length < 2 && props.data.length !== 0 ? (
             <Formik
                 initialValues={{
                     fullName: props.data[0].name,

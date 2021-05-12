@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 
 
-import { tableHand } from '../TableStyle';
+import { tableHand } from './TableStyle';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -17,7 +17,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import CustomModal from '../Modal';
+import CustomDialog from '../Dialog/Dialog';
 import AddAdminForm from '../AddForm';
 import EditAdminForm from '../EditForm';
 import DeleteForm from '../DeleteForm';
@@ -92,7 +92,7 @@ const EnhancedTableToolbar = (props) => {
                     </div>
                 )}
             </Grid>
-            <CustomModal title={modalContent.title} form={modalContent.content} open={open} setOpenState={setOpenState} />
+            <CustomDialog title={modalContent.title} form={modalContent.content} open={open} setOpenState={setOpenState} />
         </Toolbar>
     );
 };
