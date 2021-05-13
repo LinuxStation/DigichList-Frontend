@@ -30,6 +30,9 @@ export default function SideMenu(props) {
     const classes = WorkflowStyle();
     const [open, setOpen] = useState(false);
 
+    const handleCloseDraw  = () => {
+        setOpen(false);
+    }
     const handleDrawer = () => {
         (!open) ? setOpen(true) : setOpen(false);
     };
@@ -51,7 +54,7 @@ export default function SideMenu(props) {
                 </div>
                 <Divider />
                 <List className={classes.list} >
-                    <ListMenuItems/>
+                    <ListMenuItems handleCloseDraw={handleCloseDraw}/>
                 </List>
                 <List className={`${classes.list} ${classes.logoutList}`}>
                     <ListItem button>

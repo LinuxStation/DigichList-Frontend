@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import WorkflowStyle from "./WorkflowStyle";
 
@@ -13,7 +14,11 @@ import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 
 
-export default function ListMenuItems() {
+export default function ListMenuItems(props) {
+    ListMenuItems.propTypes = {
+        handleCloseDraw: PropTypes.func,
+    }
+    
    
     const classes = WorkflowStyle();
     const location = useLocation();
@@ -42,7 +47,8 @@ export default function ListMenuItems() {
         },
     ]
     const handleSelect = (event, index) => {
-        setSelected(index);
+        setSelected(index)
+        props.handleCloseDraw()
     }
 
     return (

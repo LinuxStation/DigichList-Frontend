@@ -4,8 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import WorkflowStyle from "../../components/workflow/WorkflowStyle";
 import clsx from "clsx";
 
-import ShowChart from '../../components/workflow/Dashboard/Chart'
-import RequestTable from '../../components/workflow/Dashboard/RequestTable'
+import ShowChart from '../../components/workflow/Dashboard/Chart';
+import RequestTable from '../../components/workflow/Dashboard/RequestTable';
 
 export default function Dashboard() {
   const classes = WorkflowStyle();
@@ -18,8 +18,8 @@ export default function Dashboard() {
         </Paper>
       </Grid>
       <Grid item xs={12} md={4} lg={4}>
-        <Paper className={fixedHeightPaper}>Requests
-          <RequestTable />
+        <Paper className={fixedHeightPaper}>
+          <RequestTable /> 
         </Paper>
       </Grid>
       <Grid item xs={12}>

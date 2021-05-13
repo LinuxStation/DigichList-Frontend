@@ -1,60 +1,98 @@
-import * as React from 'react';
-import Button from '@material-ui/core/Button';
-import { DataGrid } from '@material-ui/data-grid';
-import FormStyle from '../../auth/FormStyle';
+import React from 'react';
+import { GroupingState, IntegratedGrouping } from '@devexpress/dx-react-grid';
+import { Grid, VirtualTable, TableHeaderRow, TableGroupRow, TableColumnResizing } from '@devexpress/dx-react-grid-material-ui';
+import "../../../styles/workflow/dashboard.scss";
 
-const columns = [
-  {
-    field: 'date',
-    headerName: 'Request number',
-    width: 170,
-    // eslint-disable-next-line react/display-name
-    renderCell: (params) => {
-      const classes = FormStyle()
-      return (
-      <strong>
-        {params.value}
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          className={classes.submitBtn}
-          style={{ marginLeft: 16 }}
-        >
-          Accept 
-        </Button>
-      </strong>)
-    }
-  },
-];
-
-const rows = [
+const data = [
   {
     id: 1,
-    date: 12,
+    title: 'df.',
+    state: 'Open',
+    openDate: `${new Date()}`,
+    solved: 34,
   },
   {
     id: 2,
-    date: 32,
+    title: 'sd.',
+    state: 'Solved',
+    openDate: `${new Date()}`,
+    solved: 14,
   },
   {
     id: 3,
-    date: 43,
+    title: 'sd.',
+    state: 'Solved',
+    openDate: `${new Date()}`,
+    solved: 12,
+  },
+  {
+    id: 4,
+    title: 'sd.',
+    state: 'Fixing',
+    openDate: `${new Date()}`,
+    solved: 31,
+  },
+  {
+    id: 5,
+    title: 'sd.',
+    state: 'Solved',
+    openDate: `${new Date()}`,
+    solved: 1,
+  },
+  {
+    id: 6,
+    title: 'ds.',
+    state: 'Open',
+    openDate: `${new Date()}`,
+    solved: 5,
+  },
+  {
+    id: 7,
+    title: 'd',
+    state: 'Open',
+    openDate: `${new Date()}`,
+    solved: 4,
   },
 ];
 
-export default function RenderCellGrid() {
-  const [selectionModel, setSelectionModel] = React.useState([]);
-  return (
-    <div style={{ height: 480, width: '100%' }}>
-      <DataGrid
-        rows={rows} 
-        columns={columns} 
-        onSelectionModelChange={(newSelection) => {
-          setSelectionModel(newSelection.selectionModel);
-        }}
-        selectionModel={selectionModel}
-      />
-    </div>
-  );
+export default class RequestTable extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: data,
+      columns: [
+        { name: 'id', title: '#id' },
+        { name: 'title', title: 'Title' },
+        { name: 'state', title: 'State' },
+        { name: 'openDate', title: 'Open Date' },
+      ],
+      defaultColumnWidths: [
+        { columnName: 'id', width: 50 },
+        { columnName: 'title', width: 160 },
+        { columnName: 'state', width: 100 },
+        { columnName: 'openDate', width: 260 },
+      ]
+    }
+  }
+
+  render() {
+    return (
+      <div className='request-table'>
+        <Grid
+          rows={data}
+          columns={this.state.columns}
+        >
+          <GroupingState
+            grouping={[{ columnName: 'state' }]}
+          />
+          <IntegratedGrouping />
+          <VirtualTable height='500px' />
+          <TableColumnResizing defaultColumnWidths={this.state.defaultColumnWidths} />
+          <TableHeaderRow />
+          <TableGroupRow />
+        </Grid>
+      </div>
+
+    )
+  }
 }

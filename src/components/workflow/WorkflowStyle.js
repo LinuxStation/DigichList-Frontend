@@ -46,7 +46,7 @@ export default makeStyles((theme) => ({
     flexGrow: 1,
   },
   drawerPaper: {
-    position: "relative",
+    position: "absolute",
     whiteSpace: "nowrap",
     overflowX: "hidden",
     boxShadow: "14.0351px 0px 25px rgba(86, 128, 248, 0.03), 35.0877px 0px 70px rgba(86, 128, 248, 0.05), 23.8596px 5.61404px 50px rgba(0, 0, 0, 0.02)",
@@ -71,6 +71,7 @@ export default makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: "100vh",
+    paddingLeft: 60,
     overflow: "auto",
   },
   container: {
@@ -82,15 +83,18 @@ export default makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    boxShadow: '14.0351px 0px 25px rgb(86 128 248 / 3%), 35.0877px 0px 70px rgb(86 128 248 / 5%), 23.8596px 5.61404px 50px rgb(0 0 0 / 2%)',
   },
   fixedHeight: {
     minHeight: '50%',
     maxHeight: '100%',
+    boxShadow: '14.0351px 0px 25px rgb(86 128 248 / 3%), 35.0877px 0px 70px rgb(86 128 248 / 5%), 23.8596px 5.61404px 50px rgb(0 0 0 / 2%)',
   },
   menuIcon: {
     color: "#707C97",
   },
   list: {
+
     "& .MuiListItem-root": {
       "&:hover": {
         "& .MuiListItemIcon-root": {
@@ -108,6 +112,7 @@ export default makeStyles((theme) => ({
         "& .MuiListItemText-root": {
           color: "#2A8BF2",
         },
+    
         "&:after": {
           position: "absolute",
           content: "''",

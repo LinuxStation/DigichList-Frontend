@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 const headCells = [
-    { id: 'id', numeric: false, disablePadding: true, label: '#' },
+    { id: 'id', numeric: false, disablePadding: true, label: '#id' },
     { id: 'fullName', numeric: true, disablePadding: false, label: 'Full name' },
     { id: 'mail', numeric: true, disablePadding: false, label: 'Email Adders' },
     { id: 'password', numeric: true, disablePadding: false, label: 'Password' },

@@ -1,166 +1,87 @@
-import * as React from 'react';
-import {
-  Chart,
-  ArgumentAxis,
-  ValueAxis,
-  LineSeries,
-  Title,
-  Legend,
-  Tooltip,
-} from '@devexpress/dx-react-chart-material-ui';
-import { withStyles } from '@material-ui/core/styles';
-import { Animation } from '@devexpress/dx-react-chart';
-import PropTypes from 'prop-types';
-import { EventTracker } from '@devexpress/dx-react-chart';
+import React, { PureComponent } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import "../../../styles/workflow/dashboard.scss";
 
-
-const format = () => tick => tick;
-const legendStyles = () => ({
-  root: {
-    display: 'flex',
-    margin: 'auto',
-    flexDirection: 'row',
-    paddingBottom: 'unset',
-  },
-});
-const legendLabelStyles = theme => ({
-  label: {
-    paddingTop: theme.spacing(1),
-    whiteSpace: 'nowrap',
-    '& .MuiTypography-body1':{
-        fontSize: 14,
-    },
-  },
-});
-const legendItemStyles = () => ({
-  item: {
-    flexDirection: 'column',
-  },
-});
 
 const data = [
-    {
-      year: 1993, tvNews: 19, church: 29,
-    }, {
-      year: 1995, tvNews: 13, church: 32, 
-    }, {
-      year: 1997, tvNews: 14, church: 35, 
-    }, {
-      year: 1999, tvNews: 13, church: 32,
-    }, {
-      year: 2001, tvNews: 15, church: 28, 
-    }, {
-      year: 2003, tvNews: 16, church: 27, 
-    }, {
-      year: 2006, tvNews: 12, church: 28, 
-    }, {
-      year: 2008, tvNews: 11, church: 26,
-    }, {
-      year: 2010, tvNews: 10, church: 25, 
-    }, {
-      year: 2012, tvNews: 11, church: 25, 
-    }, {
-      year: 2014, tvNews: 10, church: 25, 
-    }, {
-      year: 2016, tvNews: 8, church: 20, 
-    }, {
-      year: 2018, tvNews: 10, church: 20,
-    },
-  ];
-
-const legendRootBase = ({ classes, ...restProps }) => (
-  <Legend.Root {...restProps} className={classes.root} />
-);
-const legendLabelBase = ({ classes, ...restProps }) => (
-  <Legend.Label className={classes.label} {...restProps} />
-);
-const legendItemBase = ({ classes, ...restProps }) => (
-  <Legend.Item className={classes.item} {...restProps} />
-);
-const Root = withStyles(legendStyles, { name: 'LegendRoot' })(legendRootBase);
-const Label = withStyles(legendLabelStyles, { name: 'LegendLabel' })(legendLabelBase);
-const Item = withStyles(legendItemStyles, { name: 'LegendItem' })(legendItemBase);
-const demoStyles = () => ({
-  chart: {
-    paddingRight: '20px',
-    
+  {
+    name: 'Mon.',
+    open: 20,
+    fixing: 20,
+    solved: 34,
   },
-  title: {
-    whiteSpace: 'pre',
+  {
+    name: 'Tue.',
+    open: 10,
+    fixing: 25,
+    solved: 14,
   },
-});
-
-const ValueLabel = (props) => {
-  const { text } = props;
-  return (
-    <ValueAxis.Label
-      {...props}
-      text={`${text}`}
-    />
-  );
-};
-ValueLabel.propTypes = {
-    text: PropTypes.string,
-}
-
-const titleStyles = {
-  title: {
-    whiteSpace: 'pre',
+  {
+    name: 'Wed.',
+    open: 21,
+    fixing: 23,
+    solved: 12,
   },
-};
-const TitleText = withStyles(titleStyles)(({ classes, ...props }) => (
-  <Title.Text {...props} className={classes.title} />
-));
+  {
+    name: 'Thu.',
+    open: 10,
+    fixing: 50,
+    solved: 31,
+  },
+  {
+    name: 'Fri.',
+    open: 20,
+    fixing: 5,
+    solved: 1,
+  },
+  {
+    name: 'Sat.',
+    open: 28,
+    fixing: 26,
+    solved: 5,
+  },
+  {
+    name: 'Sun.',
+    open: 28,
+    fixing: 12,
+    solved: 4,
+  },
+];
 
-class Demo extends React.PureComponent {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      data,
-      targetItem: undefined,
-    };
-    this.changeTargetItem = targetItem => this.setState({ targetItem });
+
+export default class ShowChart extends PureComponent {
+  constructor(props){
+    super(props)
+    this.state= {
+      data: data,
+    }
   }
 
   render() {
-    const { data: chartData, targetItem } = this.state;
-    const { classes } = this.props;
-
     return (
-        <Chart
-          data={chartData}
-          className={classes.chart}
+      <ResponsiveContainer className="chart-container">
+        <LineChart
+          width={500}
+          height={300}
+          data={this.state.data}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 5,
+          }}
         >
-          <ArgumentAxis tickFormat={format} />
-          <ValueAxis
-            max={50}
-            labelComponent={ValueLabel}
-          />
-          <LineSeries
-            name="New bug request"
-            valueField="tvNews"
-            argumentField="year"
-          />
-          <LineSeries
-            name="Fixed bugs"
-            valueField="church"
-            argumentField="year"
-          />
-          <EventTracker/>
-          <Tooltip targetItem={targetItem} onTargetItemChange={this.changeTargetItem} />
-          <Legend position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />
-          <Title
-            text={`Bug statistics  ${'\n'}`}
-            textComponent={TitleText}
-          />
-          <Animation />
-        </Chart>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="open" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="fixing" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="solved" stroke="#707C97" />
+        </LineChart>
+      </ResponsiveContainer>
     );
   }
 }
-Demo.propTypes = {
-    classes: PropTypes.object,
-}
-
-export default withStyles(demoStyles, { name: 'Demo' })(Demo);
