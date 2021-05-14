@@ -78,8 +78,8 @@ export default class ShowChart extends PureComponent {
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="open" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="fixing" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="solved" stroke="#707C97" />
+          <Line type="monotone" dataKey="fixing" stroke="#707C97" />
+          <Line type="monotone" dataKey="solved" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     );

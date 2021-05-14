@@ -36,9 +36,9 @@ export default function ListMenuItems(props) {
             href: "/workflow/admin-users"
         },
         {
-            text: "Workers",
+            text: "Employers",
             icon: <WorkOutlineIcon />,
-            href: "/workflow/worker-users"
+            href: "/workflow/employers-users"
         },
         {
             text: "Defects",

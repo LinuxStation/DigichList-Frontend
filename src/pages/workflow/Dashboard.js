@@ -6,6 +6,8 @@ import clsx from "clsx";
 
 import ShowChart from '../../components/workflow/Dashboard/Chart';
 import RequestTable from '../../components/workflow/Dashboard/RequestTable';
+import BarChart from '../../components/workflow/Dashboard/BarChart';
+
 
 export default function Dashboard() {
   const classes = WorkflowStyle();
@@ -19,11 +21,15 @@ export default function Dashboard() {
       </Grid>
       <Grid item xs={12} md={4} lg={4}>
         <Paper className={fixedHeightPaper}>
-          <RequestTable /> 
+         <BarChart/>
         </Paper>
       </Grid>
       <Grid item xs={12}>
-        <Paper className={classes.paper}>Orders</Paper>
+        <Paper className={classes.paper}>
+            <Grid item xs={12} md={4} lg={12}>
+            <RequestTable />
+            </Grid>
+        </Paper>
       </Grid>
     </Grid>
   )

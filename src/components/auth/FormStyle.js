@@ -73,7 +73,7 @@ export default makeStyles((theme) => ({
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: '#0d6efd',
+        backgroundColor: '#0d6efd !important',
         width: theme.spacing(5.5),
         height: theme.spacing(5.5),
     },
@@ -83,6 +83,13 @@ export default makeStyles((theme) => ({
             backgroundColor: 'transparent',
         },
     },
+    dataGrid : {
+        fontSize: 12.5,
+        '& .MuiDataGrid-colCell-draggable .MuiDataGrid-colCellTitle': {
+            fontWeight: 'bold',
+        }
+    },
+
     checkBoxLabel: {
         marginBottom: 6,
     },
@@ -139,6 +146,12 @@ export default makeStyles((theme) => ({
         backgroundColor: '#0d6efd',
         '&:hover': {
             backgroundColor: '#005EEA',
+        }
+    },
+    denyBtn: {
+        backgroundColor: '#707C97',
+        "&:hover": {
+            backgroundColor: '#565E70'
         }
     },
     resetPassword: {
