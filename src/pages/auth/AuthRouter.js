@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Switch,Route, Redirect, useLocation } from 'react-router-dom';
 import Login from './Login';
 import ConfirmPassword from './ConfirmPassword';
 import ForgotPassword from './ForgotPassword';
@@ -8,15 +8,18 @@ import '../../styles/auth/auth.scss';
 
 
 export default function Auth() {
+    const history = useLocation();
+    console.log(history.pathname)
     return (
-        <Router>
-            <Route path="/auth/login" component={Login}/>
-            <Route path="/auth/forgot-password" component={ForgotPassword} />
-            <Route path="/auth/security-code/:id" component={SecurityCode} />
-            <Route path="/auth/confirm-password" component={ConfirmPassword} />
+        <Switch>
+            <Route exact path="/auth/login" component={Login}/>
+            <Route exact path="/auth/forgot-password" component={ForgotPassword} />
+            <Route exact path="/auth/security-code/:id" component={SecurityCode} />
+            <Route exact path="/auth/confirm-password" component={ConfirmPassword} />
             <Route exact path="/auth">
                 <Redirect to="/auth/login"/>
             </Route>
-        </Router>
+            <Redirect to="/"/>
+        </Switch>
     )
 }

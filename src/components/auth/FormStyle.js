@@ -31,6 +31,40 @@ export default makeStyles((theme) => ({
             },
         },
     },
+    form: {
+        maxWidth: 450,
+        minWidth: 280,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+        '& .MuiSvgIcon-root':{
+            fontSize: 28,
+        },
+        '& .MuiFormLabel-root': {
+            '&.Mui-focused': {
+                color: '#0d6efd',
+            }
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: 'rgb(206, 212, 218)',
+                borderWidth: 1.5,
+            },
+            '&:hover fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'rgb(134, 183, 254)',
+            },
+        },
+    },
+    fullWidth: {
+        width: '100%',
+    },
+    primary: {
+        color: '#2A8BF2',
+    },
     cardContent: {
         display: 'flex',
         flexDirection: 'column',
@@ -39,7 +73,7 @@ export default makeStyles((theme) => ({
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: '#0d6efd',
+        backgroundColor: '#0d6efd !important',
         width: theme.spacing(5.5),
         height: theme.spacing(5.5),
     },
@@ -49,6 +83,13 @@ export default makeStyles((theme) => ({
             backgroundColor: 'transparent',
         },
     },
+    dataGrid : {
+        fontSize: 12.5,
+        '& .MuiDataGrid-colCell-draggable .MuiDataGrid-colCellTitle': {
+            fontWeight: 'bold',
+        }
+    },
+
     checkBoxLabel: {
         marginBottom: 6,
     },
@@ -105,6 +146,12 @@ export default makeStyles((theme) => ({
         backgroundColor: '#0d6efd',
         '&:hover': {
             backgroundColor: '#005EEA',
+        }
+    },
+    denyBtn: {
+        backgroundColor: '#707C97',
+        "&:hover": {
+            backgroundColor: '#565E70'
         }
     },
     resetPassword: {

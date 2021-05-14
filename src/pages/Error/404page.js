@@ -64,7 +64,7 @@ export default function Error404() {
                                 <ListItemText primary={`/workflow/defects`} />
                             </ListItem>
                             <ListItem className={styles.listMargin}>
-                                <ListItemText primary={`/auth/worker-users`} />
+                                <ListItemText primary={`/workflow/employers-users`} />
                             </ListItem>
                         </ul>
                     </li>
