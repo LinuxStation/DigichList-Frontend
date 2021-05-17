@@ -3,27 +3,32 @@
   width: 100%;
   font-size: 12.5px;
 }
-.request-table{
+.request-table {
   border-radius: 4px;
   border: 1px solid rgba(224, 224, 224, 1);
-    .MuiTableRow-root {
+  .MuiTableRow-root {
     font-size: 14px;
-  .MuiTableCell-root {
-    font-size: 12.5px;
-    text-align: unset;
-    span {
+    .MuiTableCell-root {
+      font-size: 12.5px;
+      text-align: unset;
+      span {
         font-size: 12.5px;
-    }
-    div {
+      }
+      div {
         display: block;
         justify-content: unset;
-      div {
-        span {
+        div {
+          span {
             font-weight: bold;
+          }
         }
       }
     }
   }
 }
-}
 
+.MuiDataGridMenu-root {
+  .MuiListItem-root {
+    font-size: 13px;
+  }
+}
