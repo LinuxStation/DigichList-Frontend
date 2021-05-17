@@ -83,6 +83,7 @@ const EditAdmin = (props) => {
                                 </MuiDialogContent>
                                 <MuiDialogActions>
                                     <Button
+                                        size="small"
                                         className={styles.submitBtn}
                                         type="submit"
                                         disableRipple

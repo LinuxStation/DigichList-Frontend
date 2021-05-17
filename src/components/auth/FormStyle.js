@@ -87,6 +87,10 @@ export default makeStyles((theme) => ({
         fontSize: 12.5,
         '& .MuiDataGrid-colCell-draggable .MuiDataGrid-colCellTitle': {
             fontWeight: 'bold',
+            fontSize: 12.5,
+        },
+        '& .MuiDataGridMenu-root': {
+            backgroundColor: 'red'
         }
     },
 
@@ -148,8 +152,20 @@ export default makeStyles((theme) => ({
             backgroundColor: '#005EEA',
         }
     },
-    denyBtn: {
+    cancelBtn: {
         backgroundColor: '#707C97',
+        "&:hover": {
+            backgroundColor: '#565E70'
+        }
+    },
+    denyBtn: {
+        backgroundColor: '#f44336',
+        "&:hover": {
+            backgroundColor: '#D2362A'
+        }
+    },
+    acceptBtn: {
+        backgroundColor: '#4caf50',
         "&:hover": {
             backgroundColor: '#565E70'
         }
@@ -170,6 +186,38 @@ export default makeStyles((theme) => ({
         color: 'rgb(108, 117, 125)',
         fontSize: 12,
         margin: '-2px 2px 8px 2px',
+    },
+    rootClip: {
+
+    },
+    allowed: {
+        textTransform: 'none',
+        borderColor: '#4caf50',
+        color: '#4caf50',
+        '& .MuiChip-icon': {
+            color: '#4caf50',
+        }
+    },
+    forbidden: {
+        textTransform: 'none',
+        color: '#f44336',
+        borderColor: '#f44336',
+        '& .MuiChip-icon': {
+            color: '#f44336',
+        }
+    },
+    regMenu: {
+        '& .MuiButtonBase-root': {
+            fontSize: 13,
+        },
+        '& .MuiMenu-paper': {
+            boxShadow: '10px 10px 25px rgba(42, 139, 242, 0.1), 15px 15px 35px rgba(42, 139, 242, 0.05), 10px 10px 50px rgba(42, 139, 242, 0.1)',
+        }
+        
+    },
+    fixedHeightTable: {
+        width: '100%',
+        height: theme.spacing(107),
     }
 }));
 
