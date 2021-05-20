@@ -19,15 +19,15 @@ const DeleteForm = (props) => {
             <div className={styles.fullWidth}>
                 <MuiDialogContent dividers>
                     <Typography variant="body1" className={styles.title}>
-                        You really want delete this data (<strong className={styles.primary}>{props.data.length}</strong> items)?
+                        You really want delete this data (<strong className={styles.primary}>{props.data.length} items</strong>)?
                     </Typography>
                     <div className={styles.demo}>
                         <List>
                             {props.data.map((item) => {
-                                const { name, id } = item
+                                const { email, id } = item
                                 return (
                                     <Typography key={id} variant="body2" className={styles.title}>
-                                        {`{ Id = ${id}; name = ${name} }`}
+                                        {`{ Id#${id}; email: ${email} }`}
                                     </Typography>
                                 )
                             })}

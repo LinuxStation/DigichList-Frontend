@@ -39,7 +39,9 @@ export default function CustomizedDialogs(props) {
     return (
         <Dialog aria-labelledby="customized-dialog-title" open={open} className={classes.dialogWindow} >
             <DialogTitle id="customized-dialog-title" classes={classes} onClose={handleClose} >
+                <>
                 {title}
+                </>
             </DialogTitle>
             {form}
         </Dialog>

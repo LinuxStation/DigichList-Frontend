@@ -1,9 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 import Button from '@material-ui/core/Button';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
-import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+
 import FormStyle from '../../../components/auth/FormStyle';
 
 import { Formik } from "formik";
@@ -15,14 +17,15 @@ const EditAdmin = (props) => {
         { props.data.length < 2 && props.data.length !== 0 ? (
             <Formik
                 initialValues={{
-                    fullName: props.data[0].name,
-                    email: props.data[0].mail,
+                    firstName: props.data[0].firstName,
+                    lastName: props.data[0].lastName,
+                    email: props.data[0].email,
                     password: props.data[0].password,
                 }}
                 validationSchema={Yup.object().shape({
-                    fullName: Yup.string()
-                        .min(5, 'Too Short!')
-                        .max(50, 'Too Long!')
+                    Name: Yup.string()
+                        .min(2, 'Too Short!')
+                        .max(20, 'Too Long!')
                         .required('Required'),
                     email: Yup.string()
                         .email('Invalid email')
@@ -47,12 +50,25 @@ const EditAdmin = (props) => {
                                         variant="outlined"
                                         margin="normal"
                                         helperText={formik.errors.fullName}
-                                        {...formik.getFieldProps('fullName')}
+                                        {...formik.getFieldProps('firstName')}
                                         fullWidth
                                         size="small"
-                                        label="Full name"
+                                        label="First name"
                                         type="name"
-                                        id="fullName"
+                                        id="firstName"
+                                    />
+                                    <TextField
+                                        error={formik.errors.fullName == 'Too Long!' || formik.errors.fullName == 'Too Short!'}
+                                        className={styles.formInput}
+                                        variant="outlined"
+                                        margin="normal"
+                                        helperText={formik.errors.fullName}
+                                        {...formik.getFieldProps('lastName')}
+                                        fullWidth
+                                        size="small"
+                                        label="Last name"
+                                        type="name"
+                                        id="LastName"
                                     />
                                     <TextField
                                         error={formik.errors.email == 'Invalid email'}
@@ -88,7 +104,7 @@ const EditAdmin = (props) => {
                                         type="submit"
                                         disableRipple
                                         variant="contained">
-                                        Edit
+                                        Save
                                 </Button>
                                 </MuiDialogActions>
                             </div>
@@ -98,8 +114,8 @@ const EditAdmin = (props) => {
             </Formik>
         ) : (
             <div className={styles.form}>
-                <MuiDialogContent dividers>
-                    <div>Please select one row</div>
+                <MuiDialogContent dividers className={styles.size}>
+                    <div className={styles.primary}>Please select one row</div>
                 </MuiDialogContent>
             </div>
         )}
