@@ -14,7 +14,7 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
-import CustomDialog from '../Dialog/Dialog';
+import CustomDialog from '../../Dialog/Dialog';
 import AddAdminForm from '../AddForm';
 import EditAdminForm from '../EditForm';
 import DeleteForm from '../DeleteForm';

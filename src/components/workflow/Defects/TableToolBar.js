@@ -14,7 +14,7 @@ import AddCircleOutlineSharpIcon from '@material-ui/icons/AddCircleOutlineSharp'
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
-import CustomDialog from '../AdminUsers/Dialog/Dialog';
+import CustomDialog from '../Dialog/Dialog';
 
 
 export default function CustomToolbar(numSelected) {
