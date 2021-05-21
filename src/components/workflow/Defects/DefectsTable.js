@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -7,13 +7,16 @@ import {
 import TableStyle from './TableStyle'
 import Chip from '@material-ui/core/Chip';
 import FormStyle from '../../auth/FormStyle';
-
+import Button from '@material-ui/core/Button';
 
 import FiberManualRecordRoundedIcon from '@material-ui/icons/FiberManualRecordRounded';
 import ErrorRoundedIcon from '@material-ui/icons/ErrorRounded';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 
+
 import TableTools from './TableToolBar';
+import DescriptionModal from './DescriptionModal'
+
 
 const columns = [
     {
@@ -37,23 +40,62 @@ const columns = [
         width: 150,
     },
     {
+        field: 'decides',
+        headerName: 'Decides defect',
+        width: 150,
+    },
+
+    {
         field: 'state',
         headerName: 'State',
         width: 150,
         // eslint-disable-next-line react/display-name
         renderCell: (params) => {
             const classes = FormStyle()
+            const paramValue = params.value;
+
             return (
                 <div>
-                    {params.value == 'Open' ? (
-                        <Chip className={classes.opened} variant="outlined" size="small" label="Open" icon={<ErrorRoundedIcon />} />
+                    {paramValue == 'Open' ? (
+                        <Chip  variant="outlined" size="small" label="Open" className={classes.opened} icon={<ErrorRoundedIcon />} />
                     ) : (
-                        params.value == 'Fixing' ? (
-                            <Chip className={classes.fixing} variant="outlined" size="small" label="Fixing" icon={<FiberManualRecordRoundedIcon />} />
+                        paramValue == 'Fixing' ? (
+                            <Chip variant="outlined" size="small" label="Fixing" className={classes.fixing} icon={<FiberManualRecordRoundedIcon />} />
                         ) : (
                             <Chip className={classes.allowed} variant="outlined" size="small" label="Solved" icon={<CheckCircleRoundedIcon />} />
                         )
                     )}
+                </div>
+            )
+        },
+    },
+    {
+        field: 'description',
+        headerName: 'Description',
+        width: 350,
+        // eslint-disable-next-line react/display-name
+        renderCell: (params) => {
+            const context = params.row
+            const classes = FormStyle()
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const [open, setOpen] = React.useState(false);
+
+            const handleOpen = () => {
+                setOpen(true);
+            };
+
+            const handleClose = () => {
+                setOpen(false);
+            };
+            
+            return (
+                <div>
+                    {open ? <DescriptionModal open={open} handleClose={handleClose} context={context} />
+                        : null
+                    }
+                    <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleOpen} className={classes.description} >
+                        {params.value}
+                    </Button>
                 </div>
             )
         }
@@ -68,7 +110,6 @@ const columns = [
         headerName: 'Closed Date',
         width: 250,
     },
-
 ];
 
 
@@ -77,6 +118,7 @@ export default function DefectsTable(props) {
     const rows = props.data
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [page, setPage] = React.useState(0);
+    
     return (
         <div className={classes.root}>
             <DataGrid
@@ -91,11 +133,12 @@ export default function DefectsTable(props) {
                 onPageChange={(params) => {
                     setPage(params.page);
                 }}
-                pageSize={13} 
+                pageSize={13}
+                disableSelectionOnClick
                 rowsPerPageOptions={[13, 20, 50]}
                 selectionModel={selectionModel}
                 components={{
-                    Toolbar: ((event) => TableTools(selectionModel)),
+                    Toolbar: ((event) => TableTools(props.data, selectionModel)),
                 }}
             />
         </div>

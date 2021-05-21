@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 
 import {
     GridToolbarContainer,
@@ -15,17 +15,32 @@ import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
 import CustomDialog from '../Dialog/Dialog';
+import AddForm from './CRUD/AddForm'
+import DeleteForm from './CRUD/DeleteForm'
 
 
-export default function CustomToolbar(numSelected) {
+function SelectData(data, selected) {
+    let temp = []
+    for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < selected.length; j++) {
+            if (data[i].id == selected[j]) {
+                temp.push(data[i])
+            }
+        }
+    }
+    return temp;
+}
+
+export default function CustomToolbar(data, numSelected) {
     const [open, setOpenState] = React.useState(false)
     const [modalContent, setModalContent] = React.useState({});
     const classes = TableStyle()
+    const btnId = [0,1,2]
 
     const modalData = [
         {
             id: 'addAdmin',
-            content: '',
+            content: <AddForm />,
             title: 'Add new defect',
         },
         {
@@ -35,7 +50,7 @@ export default function CustomToolbar(numSelected) {
         },
         {
             id: 'deleteAdmin',
-            content: '',
+            content: <DeleteForm data={SelectData(data, numSelected)} />,
             title: 'Delete defects',
         }
     ]
@@ -45,33 +60,34 @@ export default function CustomToolbar(numSelected) {
         setModalContent(modalData[dataId])
     };
 
-    console.log(numSelected)
     return (
         <GridToolbarContainer>
             <Grid container spacing={3}>
-                <Grid item xs={10}>
+                <Grid item xs={5} md={9} lg={10}>
                     <GridFilterToolbarButton className={classes.toolButton} />
                     <GridToolbarExport className={classes.toolButton} />
                 </Grid>
-                <Grid item xs={2} className={classes.toolGrid}>
+                <Grid item xs={7} md={3} lg={2} className={classes.toolGrid}>
                     <Tooltip title="Add new defect">
-                        <IconButton aria-label="add" className={classes.toolIcon} onClick={event => handleClickOpen(0, event)}>
+                        <IconButton aria-label="add" className={classes.toolIcon} onClick={event => handleClickOpen(btnId[0], event)}>
                             <AddCircleOutlineSharpIcon />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Edit defect">
-                        <IconButton className={classes.toolIcon} aria-label="edit" disabled={numSelected.length == 0}
-                         onClick={event => handleClickOpen(1, event)}>
-                            <EditSharpIcon />
-                        </IconButton>
+                        <>
+                            <IconButton className={classes.toolIcon} aria-label="edit" disabled={numSelected.length == 0}
+                                onClick={event => handleClickOpen(btnId[1], event)}>
+                                <EditSharpIcon />
+                            </IconButton>
+                        </>
                     </Tooltip>
                     <Tooltip title="Delete defect">
-                        <span>
+                        <>
                             <IconButton aria-label="delete" className={classes.toolIcon} disabled={numSelected.length == 0}
-                                onClick={event => handleClickOpen(2, event)}>
+                                onClick={event => handleClickOpen(btnId[2], event)}>
                                 <DeleteOutlineRoundedIcon />
                             </IconButton>
-                        </span>
+                        </>
                     </Tooltip>
                 </Grid>
             </Grid>

@@ -6,7 +6,6 @@ export default makeStyles((theme) => ({
     root: {
         margin: 0,
         padding: theme.spacing(2),
-        
     },
     closeButton: {
         position: 'absolute',

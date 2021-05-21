@@ -63,6 +63,7 @@ export default function AdminUsersTable(props) {
                     setPage(params.page);
                 }}
                 pageSize={13} 
+                disableSelectionOnClick
                 rowsPerPageOptions={[13, 20, 50]}
                 selectionModel={selectionModel}
                 components={{

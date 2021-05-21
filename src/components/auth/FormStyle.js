@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
-        '& .MuiSvgIcon-root':{
+        '& .MuiSvgIcon-root': {
             fontSize: 28,
         },
         '& .MuiFormLabel-root': {
@@ -39,7 +39,27 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
-        '& .MuiSvgIcon-root':{
+        '& .MuiSnackbar-root': {
+            '& .MuiSnackbarContent-message': {
+                '& .MuiDropzoneSnackbar-message': {
+                    '& .MuiSvgIcon-root': {
+                        fontSize: 20,
+                    },
+                    fontSize: 14,
+                }
+            },
+            '& .MuiSnackbarContent-action': {
+                '& .MuiButtonBase-root': {
+                    '& .MuiIconButton-label': {
+                        '& .MuiDropzoneSnackbar-icon': {
+                            fontSize: '20px !important',
+                        }
+                    }
+
+                }
+            }
+        },
+        '& .MuiSvgIcon-root': {
             fontSize: 28,
         },
         '& .MuiFormLabel-root': {
@@ -88,11 +108,11 @@ export default makeStyles((theme) => ({
             backgroundColor: 'transparent',
         },
     },
-    dataGrid : {
+    dataGrid: {
         fontSize: 12.5,
         '& .MuiDataGrid-cell': {
             '&:focus': {
-                outline:`solid ${defaultTextColor} 1px`,
+                outline: `solid ${defaultTextColor} 1px`,
             },
             '& .Mui-checked': {
                 color: defaultTextColor,
@@ -100,7 +120,7 @@ export default makeStyles((theme) => ({
         },
         '& .MuiDataGrid-colCell': {
             '&:focus': {
-                outline:`solid ${defaultTextColor} 1px`,
+                outline: `solid ${defaultTextColor} 1px`,
             },
         },
         '& .MuiDataGrid-colCell-draggable .MuiDataGrid-colCellTitle': {
@@ -153,6 +173,7 @@ export default makeStyles((theme) => ({
     formInput: {
         borderRadius: 3.5,
         borderColor: '#e1e5eb',
+        marginTop: 10,
         '& label': {
             fontSize: 14,
         },
@@ -161,6 +182,39 @@ export default makeStyles((theme) => ({
                 fontSize: 10,
             },
         },
+    },
+    dialogContent: {
+        '&:first-child': {
+            paddingTop: 8,
+        }
+    },
+    dopzoneAreaText: {
+        marginBottom: 8,
+        minHeight: '150px !important',
+        '& .MuiTypography-root': {
+            fontSize: 16,
+            color: defaultTextColor,
+        },
+        '& .MuiSvgIcon-root': {
+            fontSize: 20,
+            color: defaultTextColor
+        }
+    },
+    description: {
+        textTransform: 'none',
+        textOverflow: 'ellipsis',
+        '& .MuiButton-label': {
+            fontSize: 12.5,
+            width: 320,
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            display:'inline-block',
+            justifyContent: 'start',
+            textOverflow: 'ellipsis',
+        }
+    },
+    error: {
+        color: 'red',
     },
     submitBtn: {
         color: 'white',
@@ -246,7 +300,7 @@ export default makeStyles((theme) => ({
         },
         '& .MuiMenu-paper': {
             boxShadow: '10px 10px 25px rgba(42, 139, 242, 0.1), 15px 15px 35px rgba(42, 139, 242, 0.05), 10px 10px 50px rgba(42, 139, 242, 0.1)',
-        } 
+        }
     },
     fixedHeightTable: {
         width: '100%',

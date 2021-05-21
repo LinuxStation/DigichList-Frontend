@@ -16,11 +16,17 @@ export default makeStyles((theme) => ({
             '&:focus': {
                 outline:`solid ${defaultTextColor} 1px`,
             },
+            '&:focus-within': {
+                outline:`solid ${defaultTextColor} 1px`,
+            },
             '& .Mui-checked': {
                 color: defaultTextColor,
             },
         },
         '& .MuiDataGrid-colCell':{
+            '&:focus': {
+                outline:`solid ${defaultTextColor} 1px`,
+            },
             '& .Mui-checked': {
                 color: defaultTextColor,
             },
