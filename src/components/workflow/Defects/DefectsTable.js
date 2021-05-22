@@ -17,8 +17,53 @@ import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import TableTools from './TableToolBar';
 import DescriptionModal from './DescriptionModal'
 
+function RenderDescription(params) {
+    const context = params.row
+    const classes = FormStyle()
+    const [open, setOpen] = React.useState(false);
 
-const columns = [
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return (
+        <div>
+            {open ? <DescriptionModal open={open} handleClose={handleClose} context={context} />
+                : null
+            }
+            <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleOpen} className={classes.description} >
+                {params.value}
+            </Button>
+        </div>
+    )
+}
+
+
+function RenderState(params) {
+    const classes = FormStyle()
+    const paramValue = params.value;
+
+    return (
+        <div>
+            {paramValue == 'Open' ? (
+                <Chip variant="outlined" size="small" label="Open" className={classes.opened} icon={<ErrorRoundedIcon />} />
+            ) : (
+                paramValue == 'Fixing' ? (
+                    <Chip variant="outlined" size="small" label="Fixing" className={classes.fixing} icon={<FiberManualRecordRoundedIcon />} />
+                ) : (
+                    <Chip className={classes.allowed} variant="outlined" size="small" label="Solved" icon={<CheckCircleRoundedIcon />} />
+                )
+            )}
+        </div>
+    )
+}
+
+
+const column1s = [
     {
         field: 'id',
         headerName: '#id',
@@ -44,71 +89,17 @@ const columns = [
         headerName: 'Decides defect',
         width: 150,
     },
-
     {
         field: 'state',
         headerName: 'State',
         width: 150,
-        // eslint-disable-next-line react/display-name
-        renderCell: (params) => {
-            const classes = FormStyle()
-            const paramValue = params.value;
-
-            return (
-                <div>
-                    {paramValue == 'Open' ? (
-                        <Chip  variant="outlined" size="small" label="Open" className={classes.opened} icon={<ErrorRoundedIcon />} />
-                    ) : (
-                        paramValue == 'Fixing' ? (
-                            <Chip variant="outlined" size="small" label="Fixing" className={classes.fixing} icon={<FiberManualRecordRoundedIcon />} />
-                        ) : (
-                            <Chip className={classes.allowed} variant="outlined" size="small" label="Solved" icon={<CheckCircleRoundedIcon />} />
-                        )
-                    )}
-                </div>
-            )
-        },
+        renderCell: RenderState,
     },
     {
         field: 'description',
         headerName: 'Description',
-        width: 350,
-        // eslint-disable-next-line react/display-name
-        renderCell: (params) => {
-            const context = params.row
-            const classes = FormStyle()
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const [open, setOpen] = React.useState(false);
-
-            const handleOpen = () => {
-                setOpen(true);
-            };
-
-            const handleClose = () => {
-                setOpen(false);
-            };
-            
-            return (
-                <div>
-                    {open ? <DescriptionModal open={open} handleClose={handleClose} context={context} />
-                        : null
-                    }
-                    <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleOpen} className={classes.description} >
-                        {params.value}
-                    </Button>
-                </div>
-            )
-        }
-    },
-    {
-        field: 'openDate',
-        headerName: 'Open Date',
-        width: 250,
-    },
-    {
-        field: 'closedDate',
-        headerName: 'Closed Date',
-        width: 250,
+        width: 300,
+        renderCell: RenderDescription,
     },
 ];
 
@@ -118,13 +109,13 @@ export default function DefectsTable(props) {
     const rows = props.data
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    
+
     return (
         <div className={classes.root}>
             <DataGrid
                 className={classes.dataTable}
                 rows={rows}
-                columns={columns}
+                columns={column1s}
                 checkboxSelection
                 onSelectionModelChange={(newSelection) => {
                     setSelectionModel(newSelection.selectionModel);

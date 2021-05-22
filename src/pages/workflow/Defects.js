@@ -1,5 +1,5 @@
 import React from 'react';
-import DefectsTable from '../../components/workflow/Defects/DefectsTable'
+import DefectsTable from '../../components/workflow/Defects/DefectsTable';
 
 import WorkflowStyle from "../../components/workflow/WorkflowStyle";
 import Paper from '@material-ui/core/Paper';
@@ -10,12 +10,9 @@ const data = [
     title: 'df.',
     state: 'Open',
     room: 47,
-    send: 'Misha Mischo',
+    send: 'Misha Mischo1',
     decides: 'Some dude',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 34,
   },
   {
     id: 2,
@@ -23,11 +20,8 @@ const data = [
     state: 'Solved',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
+    send: 'Misha Mischo2',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    closedDate: `${new Date()}`,
-    solved: 14,
   },
   {
     id: 3,
@@ -35,11 +29,8 @@ const data = [
     state: 'Solved',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo3',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 12,
   },
   {
     id: 4,
@@ -47,11 +38,8 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo4',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 31,
   },
   {
     id: 8,
@@ -59,11 +47,9 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'd',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo5',
+
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 31,
   },
   {
     id: 9,
@@ -71,11 +57,8 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'd',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo6',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 31,
   },
   {
     id: 10,
@@ -83,11 +66,8 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'd',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo7',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 31,
   },
   {
     id: 11,
@@ -95,11 +75,9 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
+    send: 'Misha Mischo8',
+
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    closedDate: `${new Date()}`,
-    solved: 31,
   },
   {
     id: 12,
@@ -107,11 +85,8 @@ const data = [
     state: 'Fixing',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo9',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 31,
   },
   {
     id: 5,
@@ -119,23 +94,17 @@ const data = [
     state: 'Solved',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
+    send: 'Misha Mischo10',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 1,
   },
   {
     id: 6,
     title: 'ds.',
     state: 'Open',
     room: 47,
-    decides: 'Some dude',
+    decides: 'Some dude11',
     send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd',
-    solved: 5,
   },
   {
     id: 7,
@@ -143,10 +112,7 @@ const data = [
     state: 'Open',
     room: 47,
     decides: 'Some dude',
-    send: 'Misha Mischo',
-    openDate: `${new Date()}`,
-    closedDate: `${new Date()}`,
-    solved: 4,
+    send: 'Misha Mischo12',
     description: 'dsakdasdjaksjdlkashda dahd hasd hashd aishd ashdhadhai dhaihd'
   },
 ]
