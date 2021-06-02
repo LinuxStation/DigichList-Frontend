@@ -27,7 +27,7 @@ export default function Dashboard() {
       <Grid item xs={12}>
         <Paper className={classes.paper}>
             <Grid item xs={12} md={4} lg={12}>
-            <RequestTable />
+              <RequestTable />
             </Grid>
         </Paper>
       </Grid>

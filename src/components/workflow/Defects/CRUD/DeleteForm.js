@@ -6,7 +6,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import FormStyle from '../../../components/auth/FormStyle';
+import FormStyle from '../../../auth/FormStyle';
 
 
 const DeleteForm = (props) => {
@@ -24,10 +24,10 @@ const DeleteForm = (props) => {
                     <div className={styles.demo}>
                         <List>
                             {props.data.map((item) => {
-                                const { email, id } = item
-                                return (
+                                const { title, id, room, state } = item
+                                return ( 
                                     <Typography key={id} variant="body2" className={styles.title}>
-                                        {`{ Id#${id}; email: ${email} }`}
+                                        {`{ Id#${id}; title: ${title}; room: ${room}; state: ${state} }`}
                                     </Typography>
                                 )
                             })}

@@ -18,22 +18,22 @@ const columns = [
     {
         field: 'id',
         headerName: '#id',
-        width: 85,
+        width: 90,
     },
     {
         field: 'firstName',
         headerName: 'Firs Name',
-        width: 125,
+        width: 145,
     },
     {
         field: 'lastName',
         headerName: 'Last Name',
-        width: 125,
+        width: 145,
     },
     {
         field: 'role',
         headerName: 'Role',
-        width: 150,
+        width: 180,
     },
     {
         field: 'isRegistered',
