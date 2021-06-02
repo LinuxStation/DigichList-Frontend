@@ -39,6 +39,12 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+        '& .MuiDropzonePreviewList-removeButton': {
+            '& .MuiSvgIcon-root':{
+                fontSize: 20,
+                color: defaultTextColor,
+            }
+        },
         '& .MuiSnackbar-root': {
             '& .MuiSnackbarContent-message': {
                 '& .MuiDropzoneSnackbar-message': {
@@ -211,6 +217,11 @@ export default makeStyles((theme) => ({
             display:'inline-block',
             justifyContent: 'start',
             textOverflow: 'ellipsis',
+        }
+    },
+    formControl: {
+        '& .MuiSvgIcon-root': {
+            fontSize: 22,
         }
     },
     error: {

@@ -15,8 +15,8 @@ import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
 
 import CustomDialog from '../Dialog/Dialog';
-import AddForm from './CRUD/AddForm'
 import DeleteForm from './CRUD/DeleteForm'
+import EditForm from './CRUD/EditForm';
 
 
 function SelectData(data, selected) {
@@ -39,13 +39,8 @@ export default function CustomToolbar(data, numSelected) {
 
     const modalData = [
         {
-            id: 'addAdmin',
-            content: <AddForm />,
-            title: 'Add new defect',
-        },
-        {
             id: 'editAdmin',
-            content: '',
+            content: <EditForm data={SelectData(data, numSelected)}/>,
             title: 'Edit defect',
         },
         {
@@ -68,15 +63,10 @@ export default function CustomToolbar(data, numSelected) {
                     <GridToolbarExport className={classes.toolButton} />
                 </Grid>
                 <Grid item xs={7} md={3} lg={2} className={classes.toolGrid}>
-                    <Tooltip title="Add new defect">
-                        <IconButton aria-label="add" className={classes.toolIcon} onClick={event => handleClickOpen(btnId[0], event)}>
-                            <AddCircleOutlineSharpIcon />
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip title="Edit defect">
                         <>
                             <IconButton className={classes.toolIcon} aria-label="edit" disabled={numSelected.length == 0}
-                                onClick={event => handleClickOpen(btnId[1], event)}>
+                                onClick={event => handleClickOpen(btnId[0], event)}>
                                 <EditSharpIcon />
                             </IconButton>
                         </>
@@ -84,7 +74,7 @@ export default function CustomToolbar(data, numSelected) {
                     <Tooltip title="Delete defect">
                         <>
                             <IconButton aria-label="delete" className={classes.toolIcon} disabled={numSelected.length == 0}
-                                onClick={event => handleClickOpen(btnId[2], event)}>
+                                onClick={event => handleClickOpen(btnId[1], event)}>
                                 <DeleteOutlineRoundedIcon />
                             </IconButton>
                         </>
