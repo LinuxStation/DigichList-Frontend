@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
-import FormStyle from '../../auth/FormStyle';
 import ModalStyle from '../EmployersUsers/ModalStyle'
 
 
 export default function AcceptModal(props) {
     const classes = ModalStyle()
-    const styles = FormStyle()
 
     const handleSubmit = (e) => {
         e.preventDefault()

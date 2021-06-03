@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import axios from 'axios';
 
 import RequestTable from '../../components/workflow/EmployersUsers/RequestTable'
 import EmployersData from '../../components/workflow/EmployersUsers/EmployersData'
 
 import WorkflowStyle from "../../components/workflow/WorkflowStyle";
+import { withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -130,28 +133,46 @@ const requestData = [
         isRegistered: 1,
         date: 43,
     },
-    
+
 ];
 
-//TODO: #11 add lazy loading on dataGrids
-export default function WorkerUsers() {
-    const classes = WorkflowStyle();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    return (
-        <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={7}>
-                <Paper className={fixedHeightPaper}>
-                    <strong>Employers Users</strong>
-                    <EmployersData data={requestData} />
-                </Paper>
+class WorkerUsers extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        }
+    }
+    componentDidMount() {
+        axios.get(`https://cors-anywhere.herokuapp.com/https://digichlistbackend.herokuapp.com/api/users`)
+            .then(res => {
+                const persons = res.data;
+                console.log(persons)
+                this.setState({ data: persons})
+            })
+    }
+    render() {
+        const { classes } = this.props;
+        const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+        return (
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={8} lg={7}>
+                    <Paper className={fixedHeightPaper}>
+                        <strong>Employers Users</strong>
+                        <EmployersData data={this.state.data} />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={4} lg={5}>
+                    <Paper className={fixedHeightPaper}>
+                        <strong>Registered requests</strong>
+                        <RequestTable data={requestData} />
+                    </Paper>
+                </Grid>
             </Grid>
-            <Grid item xs={12} md={4} lg={5}>
-                <Paper className={fixedHeightPaper}>
-                    <strong>Registered requests</strong>
-                    <RequestTable data={requestData} />
-                </Paper>
-            </Grid>
-        </Grid>
-    );
+        );
+    }
+
 }
-//TODO: #9 Styled EmployersUsers page
+
+//TODO: #11 add lazy loading on dataGrids
+export default withStyles(WorkflowStyle, { withTheme: true })(WorkerUsers)

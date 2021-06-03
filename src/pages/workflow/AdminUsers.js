@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import DataTable from '../../components/workflow/AdminUsers/DataTable/DataTable'
 
 import WorkflowStyle from "../../components/workflow/WorkflowStyle";
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from "@material-ui/core/styles";
 
 const data = [
     {
@@ -23,8 +25,8 @@ const data = [
     },
 ]
 
-export default function AdminUsers() {
-    const classes = WorkflowStyle();
+function AdminUsers(props) {
+    const {classes} = props
     return (
         <Paper className={classes.paper}>
             <strong>Admin Users</strong>
@@ -32,3 +34,5 @@ export default function AdminUsers() {
         </Paper>
     )
 }
+
+export default withStyles(WorkflowStyle,{ withTheme: true })(AdminUsers)

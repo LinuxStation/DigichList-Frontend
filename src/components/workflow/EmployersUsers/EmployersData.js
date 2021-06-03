@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
@@ -46,22 +47,22 @@ const columns = [
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const [selectedIndex, setSelectedIndex] = React.useState(paramValue);
             const options = [
-                 'Set No',
-                 'Set Yes',
+                'Set No',
+                'Set Yes',
             ];
-            
+
             return (
                 <div className={classes.rootClip}>
                     <PopupState variant="popover" popupId="demo-popup-menu">
                         {(popupState) => {
-                         
-                            const closeMenu = (event, index) =>{
+
+                            const closeMenu = (event, index) => {
                                 setSelectedIndex(index);
                                 popupState.close();
                             }
                             return (
                                 <React.Fragment>
-                                    {paramValue == 1 ? (
+                                    {selectedIndex == 1 ? (
                                         <Button aria-controls="fade-menu" aria-haspopup="true" {...bindTrigger(popupState)}>
                                             <Chip className={classes.allowed} variant="outlined" size="small" label="Yes" icon={<DoneIcon />} />
                                         </Button>
@@ -94,21 +95,22 @@ const columns = [
 ];
 
 export default function RenderCellGrid(props) {
-    const rows = props.data
     const classes = FormStyle()
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [page, setPage] = React.useState(0);
+    const [rows, setRows] = React.useState(props.data);
+
     return (
         <div className={classes.fixedHeightTable}>
             <DataGrid
                 className={classes.dataGrid}
                 rows={rows}
                 columns={columns}
-                page={page}
                 onPageChange={(params) => {
                     setPage(params.page);
                 }}
                 pageSize={14}
+                page={page}
                 pagination
                 onSelectionModelChange={(newSelection) => {
                     setSelectionModel(newSelection.selectionModel);
