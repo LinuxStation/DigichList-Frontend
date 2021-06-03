@@ -144,7 +144,7 @@ class WorkerUsers extends React.Component {
         }
     }
     componentDidMount() {
-        axios.get(`https://cors-anywhere.herokuapp.com/https://digichlistbackend.herokuapp.com/api/users`)
+        axios.get(`https://digichlistbackend.herokuapp.com/api/users`)
             .then(res => {
                 const persons = res.data;
                 console.log(persons)

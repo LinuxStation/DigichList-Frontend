@@ -62,7 +62,7 @@ const columns = [
                             }
                             return (
                                 <React.Fragment>
-                                    {selectedIndex == 1 ? (
+                                    {selectedIndex == true ? (
                                         <Button aria-controls="fade-menu" aria-haspopup="true" {...bindTrigger(popupState)}>
                                             <Chip className={classes.allowed} variant="outlined" size="small" label="Yes" icon={<DoneIcon />} />
                                         </Button>
@@ -76,7 +76,7 @@ const columns = [
                                         {options.map((option, index) => (
                                             <MenuItem
                                                 key={option}
-                                                disabled={index === selectedIndex}
+                                                disabled={index === Number(selectedIndex)}
                                                 onClick={(event) => closeMenu(event, index)}
                                             >
                                                 {option}
@@ -98,7 +98,7 @@ export default function RenderCellGrid(props) {
     const classes = FormStyle()
     const [selectionModel, setSelectionModel] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [rows, setRows] = React.useState(props.data);
+    const rows =props.data
 
     return (
         <div className={classes.fixedHeightTable}>
