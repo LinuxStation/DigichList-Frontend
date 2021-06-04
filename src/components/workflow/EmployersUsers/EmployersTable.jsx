@@ -5,11 +5,14 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
 import Chip from '@material-ui/core/Chip';
-import FormStyle from '../../auth/FormStyle';
+import FormStyle, { FormStyleMake } from '../../auth/Style/FormStyle';
+
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { LoadingOverlay } from '../TableComponents/Overlay'
 
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { withStyles } from "@material-ui/core/styles";
 
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
@@ -42,20 +45,18 @@ const columns = [
         width: 125,
         // eslint-disable-next-line react/display-name
         renderCell: (params) => {
-            const classes = FormStyle()
             const paramValue = params.value;
+            const classes = FormStyleMake()
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const [selectedIndex, setSelectedIndex] = React.useState(paramValue);
             const options = [
                 'Set No',
                 'Set Yes',
             ];
-
             return (
                 <div className={classes.rootClip}>
                     <PopupState variant="popover" popupId="demo-popup-menu">
                         {(popupState) => {
-
                             const closeMenu = (event, index) => {
                                 setSelectedIndex(index);
                                 popupState.close();
@@ -87,40 +88,64 @@ const columns = [
                             )
                         }}
                     </PopupState>
-                </div>
-            )
+                </div>)
         }
     },
 
 ];
+class RenderCellGrid extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            page: 0,
+            selectionModel: [],
+            rows: [],
+            loading: true
+        }
+    }
+    componentDidMount() {
+        this._isMounted = true;
+        axios.get(`https://digichlistbackend.herokuapp.com/api/users`)
+            .then(res => {
+                const persons = res.data;
+                this.setState({ rows: persons })
+                this.setState({loading: false})
+            })
+    }
+    componentWillUnMount() {
+        this._isMounted = false;
+    }
 
-export default function RenderCellGrid(props) {
-    const classes = FormStyle()
-    const [selectionModel, setSelectionModel] = React.useState([]);
-    const [page, setPage] = React.useState(0);
-    const rows =props.data
-
-    return (
-        <div className={classes.fixedHeightTable}>
-            <DataGrid
-                className={classes.dataGrid}
-                rows={rows}
-                columns={columns}
-                onPageChange={(params) => {
-                    setPage(params.page);
-                }}
-                pageSize={14}
-                page={page}
-                pagination
-                onSelectionModelChange={(newSelection) => {
-                    setSelectionModel(newSelection.selectionModel);
-                }}
-                selectionModel={selectionModel}
-            />
-        </div>
-    );
+    render() {
+        const { classes } = this.props
+        return (
+            <div className={classes.fixedHeightTable}>
+                <DataGrid
+                    className={classes.dataGrid}
+                    rows={this.state.rows}
+                    columns={columns}
+                    onPageChange={(params) => {
+                        this.setState({ page: params });
+                    }}
+                    components={{
+                        LoadingOverlay: LoadingOverlay,
+                    }}
+                    pageSize={14}
+                    page={this.state.page}
+                    loading={this.state.loading}
+                    pagination
+                    onSelectionModelChange={(newSelection) => {
+                        this.setState({ selectionModel: newSelection.selectionModel });
+                    }}
+                    selectionModel={this.state.selectionModel}
+                />
+            </div>
+        );
+    }
 }
 
 RenderCellGrid.propTypes = {
-    data: PropTypes.array.isRequired,
+    classes: PropTypes.object,
 };
+
+export default withStyles(FormStyle, { withTheme: true })(RenderCellGrid)

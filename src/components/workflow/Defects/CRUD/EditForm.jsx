@@ -24,39 +24,31 @@ import * as Yup from "yup";
 
 const EditForm = (props) => {
     const { data } = props;
-    console.log(data)
+    const classes = FormStyle()
     return (
         <>
             { data.length < 2 ? (
                 < Formik
                     initialValues={{
-                        title: data[0].title,
-                        roomNumber: data[0].room,
+                        roomNumber: data[0].roomNumber,
                         state: data[0].state,
-                        send: data[0].send,
+                        publisher: data[0].publisher,
                         openDate: new Date(),
                         closeDate: '',
                         image: [],
                         description: data[0].description,
-                        decides: data[0].decides,
+                        assignedDefect: `${data[0].assignedDefect}`,
                     }}
                     validationSchema={
                         Yup.object().shape({
-                            title: Yup.string()
-                                .min(5, 'Too Short!')
-                                .max(80, 'Too Long!')
-                                .required('Required'),
                             roomNumber: Yup.string()
                                 .max(5, 'Too long, we do not have this room in hotel!')
                                 .required('Required'),
-                            send: Yup.string()
-                                .min(6, 'Enter the full name of the sender')
-                                .required('Send is required'),
                             description: Yup.string()
                                 .required('Required'),
                             image: Yup.array()
                                 .min(1, 'is required!'),
-                            decides: Yup.string()
+                            assignedDefect: Yup.string()
                                 .min(5, 'Too Short!')
                                 .max(20, 'Too Long!')
                                 .required('Required'),
@@ -68,28 +60,29 @@ const EditForm = (props) => {
                 >
                     {
                         function (formik) {
-                            const styles = FormStyle()
                             return (
-                                <form onSubmit={formik.handleSubmit} className={styles.form}>
+                                <form onSubmit={formik.handleSubmit} className={classes.form}>
                                     <div>
-                                        <MuiDialogContent dividers className={styles.dialogContent}>
+                                        <MuiDialogContent dividers className={classes.dialogContent}>
 
                                             <TextField
-                                                error={formik.errors.title == 'Required' || formik.errors.title == 'Too Short!'}
-                                                className={styles.formInput}
-                                                variant="outlined"
+                                                error={formik.errors.description == 'Required'}
+                                                className={classes.formInput}
+                                                id="outlined-textarea"
+                                                label="Description"
+                                                multiline
+                                                helperText={formik.errors.description}
+                                                {...formik.getFieldProps('description')}
+                                                rowsMax={4}
                                                 margin="normal"
-                                                helperText={formik.errors.title}
-                                                {...formik.getFieldProps('title')}
-                                                fullWidth
                                                 size="small"
-                                                label="Title"
-                                                type="text"
-                                                id="title"
+                                                fullWidth
+                                                variant="outlined"
                                             />
+
                                             <TextField
                                                 error={formik.errors.roomNumber == 'Required'}
-                                                className={styles.formInput}
+                                                className={classes.formInput}
                                                 variant="outlined"
                                                 margin="normal"
                                                 helperText={formik.errors.roomNumber}
@@ -104,7 +97,7 @@ const EditForm = (props) => {
                                                 variant="outlined"
                                                 size="small"
                                                 fullWidth
-                                                className={styles.formControl}>
+                                                className={classes.formControl}>
                                                 <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-outlined-label"
@@ -112,63 +105,49 @@ const EditForm = (props) => {
 
                                                     label="State"
                                                 >
-                                                    <MenuItem value={'Open'}><Chip variant="outlined" size="small" label="Open" className={styles.opened} icon={<ErrorRoundedIcon />} /></MenuItem>
-                                                    <MenuItem value={'Solved'}><Chip className={styles.allowed} variant="outlined" size="small" label="Solved" icon={<CheckCircleRoundedIcon />} /></MenuItem>
-                                                    <MenuItem value={'Fixing'}><Chip variant="outlined" size="small" label="Fixing" className={styles.fixing} icon={<FiberManualRecordRoundedIcon />} /></MenuItem>
+                                                    <MenuItem value={'Open'}><Chip variant="outlined" size="small" label="Open" className={classes.opened} icon={<ErrorRoundedIcon />} /></MenuItem>
+                                                    <MenuItem value={'Solved'}><Chip className={classes.allowed} variant="outlined" size="small" label="Solved" icon={<CheckCircleRoundedIcon />} /></MenuItem>
+                                                    <MenuItem value={'Fixing'}><Chip variant="outlined" size="small" label="Fixing" className={classes.fixing} icon={<FiberManualRecordRoundedIcon />} /></MenuItem>
                                                 </Select>
                                             </FormControl>
-                                           
+
                                             <TextField
-                                                error={formik.errors.decides == 'Required'}
-                                                className={styles.formInput}
-                                                id="decides"
-                                                label="Decides defect"
-                                                helperText={formik.errors.decides}
-                                                {...formik.getFieldProps('decides')}
-                                                margin="normal"
-                                                size="small"
-                                                fullWidth
-                                                variant="outlined"
-                                            /> 
-                                            <TextField
-                                                error={formik.errors.description == 'Required'}
-                                                className={styles.formInput}
-                                                id="outlined-textarea"
-                                                label="Description"
-                                                multiline
-                                                helperText={formik.errors.description}
-                                                {...formik.getFieldProps('description')}
-                                                rowsMax={4}
+                                                error={formik.errors.assignedDefect == 'Required'}
+                                                className={classes.formInput}
+                                                id="assignedDefect"
+                                                label="Assigned Defect"
+                                                helperText={formik.errors.assignedDefect}
+                                                {...formik.getFieldProps('assignedDefect')}
                                                 margin="normal"
                                                 size="small"
                                                 fullWidth
                                                 variant="outlined"
                                             />
-                                            <Typography variant="body2" className={formik.errors.image == 'is required!' ? styles.error : null}
+                                            <Typography variant="body2" className={formik.errors.image == 'is required!' ? classes.error : null}
                                                 component="h1" gutterBottom>
                                                 Chose image: {formik.errors.image}
                                             </Typography>
                                             <DropzoneArea
-                                                className={styles.dropzoneArea}
-                                                dropzoneClass={styles.dopzoneAreaText}
+                                                className={classes.dropzoneArea}
+                                                dropzoneClass={classes.dopzoneAreaText}
                                                 showPreviews={true}
                                                 showPreviewsInDropzone={false}
-                                                
+
                                                 onChange={(files) => {
                                                     formik.values.image = files
                                                 }}
                                                 previewGridProps={{ container: { spacing: 1, direction: 'row' } }}
-                                                previewChipProps={{ classes: { root: styles.previewChip } }}
+                                                previewChipProps={{ classes: { root: classes.previewChip } }}
                                                 previewText='' />
                                         </MuiDialogContent>
                                         <MuiDialogActions>
                                             <Button
                                                 size="small"
-                                                className={styles.submitBtn}
+                                                className={classes.submitBtn}
                                                 type="submit"
                                                 disableRipple
                                                 variant="contained">
-                                                Add
+                                                Save
                                 </Button>
                                         </MuiDialogActions>
                                     </div>
@@ -179,9 +158,11 @@ const EditForm = (props) => {
                 </Formik >
 
             ) : (
-                <>
-                    <h1>Sorry</h1>
-                </>
+                <div className={classes.form}>
+                    <MuiDialogContent dividers className={classes.size}>
+                        <div className={classes.primary}>Please select one row</div>
+                    </MuiDialogContent>
+                </div>
             )
             }
         </>

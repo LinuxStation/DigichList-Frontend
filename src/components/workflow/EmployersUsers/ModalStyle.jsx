@@ -9,7 +9,6 @@ export default makeStyles((theme) => ({
     paper: {
         backgroundColor: theme.palette.background.paper,
         borderRadius: 4,
-        boxShadow: '10px 10px 25px rgb(42 139 242 / 10%), 15px 15px 35px rgb(42 139 242 / 5%), 10px 10px 50px rgb(42 139 242 / 10%);',
         padding: theme.spacing(2, 2, 2),
     },
     text: {
