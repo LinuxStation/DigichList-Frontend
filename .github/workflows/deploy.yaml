@@ -1,0 +1,36 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 14
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      
+      - name: Install Node JS v${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+      
+      - name: install Dependencies
+        run: | 
+          npm run install
+      
+      - name: FrontEnd build
+        run: |
+          npm run build
+      
+      - name: Deploy to Cloud
+        uses: google-github-actions/deploy-cloudrun@main
+        with: 
+          service: test-digich-list
+          image: gcr.io/cloudrun/test-digich-list
+          region: global
+          credentials: ${{ secrets.GCP_KEY }}
